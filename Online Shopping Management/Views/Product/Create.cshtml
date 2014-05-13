@@ -1,0 +1,124 @@
+﻿@model Online_Shopping_Management.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/Product/Categories/List/", function (data) {
+                var items = "<option> Show Category List </option>";
+                $.each(data, function (i, categories) {
+                    items += "<option value='" + categories.Value + "'>" + categories.Text + "</option>";
+                });
+                $("#CategoryId").html(items);
+            });
+
+            $("#CategoryId").change(function () {
+                $.getJSON("/Product/SubCategories/List/" + $("#CategoryId > option:selected").attr("value"), function (data) {
+                    var items = "<option> Show SubCategory List </option>";
+                    $.each(data, function (i, subcategory) {
+                        items += "<option value='" + subcategory.Value + "'>" + subcategory.Text + "</option>";
+                    });
+                    $("#SubCategoryId").html(items);
+                });
+            });
+            
+            $("#SubCategoryId").change(function () {
+                $.getJSON("/Product/Models/List/" + $("#SubCategoryId > option:selected").attr("value"), function (data) {
+                    var items = "<option> Show Models List </option>";
+                    $.each(data, function (i, model) {
+                        items += "<option value='" + model.Value + "'>" + model.Text + "</option>";
+                    });
+                    $("#ModelId").html(items);
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Product</legend>
+        
+        <label for="CategoryId">Categories</label>
+        <select id="CategoryId" name="CategoryId"></select>
+        <br /><br />
+        <label for="SubCategoryId">SubCategories</label>
+        <select id="SubCategoryId" name="SubCategoryId"></select>
+        <br /><br />
+        <label for="ModelId">Model</label>
+        <select id="ModelId" name="ModelId"></select>
+        <br /><br />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductName)
+            @Html.ValidationMessageFor(model => model.ProductName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Number)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Number)
+            @Html.ValidationMessageFor(model => model.Number)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Color)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Color)
+            @Html.ValidationMessageFor(model => model.Color)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StandardCost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StandardCost)
+            @Html.ValidationMessageFor(model => model.StandardCost)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ListPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ListPrice)
+            @Html.ValidationMessageFor(model => model.ListPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Size)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Size)
+            @Html.ValidationMessageFor(model => model.Size)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EntryDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EntryDate)
+            @Html.ValidationMessageFor(model => model.EntryDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

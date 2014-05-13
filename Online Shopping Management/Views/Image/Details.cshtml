@@ -1,0 +1,64 @@
+﻿@model Online_Shopping_Management.Models.Image
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Image</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubCategory.SubCategoryName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubCategory.SubCategoryName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Model.ModelName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Model.ModelName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Product.ProductName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Product.ProductName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Size)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Size)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Path)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Path)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ImageId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
